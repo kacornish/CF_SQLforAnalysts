@@ -1,0 +1,16 @@
+This query shows the high value customers
+
+SELECT  C.first_name AS first, 	
+    C.last_name AS last,
+    CI.city AS city,
+    CO.country AS Country,
+    SUM(P.amount) AS paid
+FROM rental R	
+    JOIN customer C ON R.customer_id = C.customer_id	
+    JOIN address A ON C.address_id = A.address_id	
+    JOIN city CI ON A.city_id = CI.city_id	
+    JOIN country CO ON CI.country_id = CO.country_id	
+    JOIN payment P ON R.rental_id = P.rental_id	
+GROUP BY Country, city, first, last 	
+ORDER BY paid DESC	
+LIMIT 10	
